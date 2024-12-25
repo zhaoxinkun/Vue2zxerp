@@ -7,6 +7,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
 
+// 引入Sass样式
+import "@/styles/index.scss"
+
+
+// 取消开发提示
 Vue.config.productionTip = false
 
 new Vue({

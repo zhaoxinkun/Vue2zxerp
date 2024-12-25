@@ -20,9 +20,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 技术栈
 
-+ Vue2
-+ Vue Cli @3
-+ Vue router
-+ Element UI
-+ Sass
-+ 
++ Vue2 语法
+  + data
+  + methods
+  + components
+  + props
++ Vue Cli @3  脚手架
++ Vue router  路由库
+  + router-view
+  + Recursive
++ Element UI  组件库
++ Sass  CSS的预处理器
+  + Sass-loader 加载器
++ axios 网络请求库
