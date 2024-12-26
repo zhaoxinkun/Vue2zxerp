@@ -43,11 +43,13 @@ export default {
           this.ruleForm.password = md5(this.ruleForm.password)
           // 异步请求发送
           const res = await login(this.ruleForm)
-          // 结构结果
+          // 解构结果
           const {code, data} = res.data
+
           if (code === 20000) {
             // 封装返回的token,调用setToken方法
             setToken(data.token)
+            // 路由跳转
             await this.$router.push({path: "/container"})
           }
           // console.log("login setToken is ", token)
@@ -58,6 +60,7 @@ export default {
         }
       });
     },
+
     // 重置按钮
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -102,7 +105,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -7,17 +7,11 @@ import http from "./restfulType"
 // 用户登录
 export const login = data => http.post(`/user/login`, data)
 
-
-
-
-
-
-
-
-
-
 // 用户退出
 export const logout = token => http.post(`/user/logout`, token)
+
+
+
 
 
 // 申请管理---办公管理接口 ---------------------------------------

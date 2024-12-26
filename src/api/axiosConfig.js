@@ -13,7 +13,6 @@ import {getToken} from "@/utils/token";
 axios.defaults.baseURL = "http://124.223.161.17:5058/api/";
 
 // 书写公共配置
-
 // 请求拦截器
 axios.interceptors.request.use(config => {
     // 请求的时候都带上token
