@@ -1,27 +1,19 @@
 <template>
-
-    <el-header>
       <div class="app-breadcrumb">
-
+        <BreadCrumbs></BreadCrumbs>
         <div class="right-menu">
           <LogOut></LogOut>
         </div>
       </div>
-
-    </el-header>
-
 </template>
 
 <script>
-import LogOut from "@/container/Header/LogOut.vue";
+import {LogOut,BreadCrumbs} from "@/container/Header/index.js";
 export default {
 name: "ContainerHeader",
   components:{
-    LogOut
+    LogOut,
+    BreadCrumbs
   }
 }
 </script>
-
-<style scoped>
-
-</style>
