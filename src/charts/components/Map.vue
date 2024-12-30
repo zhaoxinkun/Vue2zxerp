@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "ChartsCom"
+  name: "map"
 }
 </script>
 

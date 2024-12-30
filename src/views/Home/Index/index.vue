@@ -1,22 +1,25 @@
 <script>
 // 引入图表
-import {FangGe,Charts01} from "@/charts/components/index.js";
+import {FangGe, Charts01} from "@/charts/components/index.js";
 
 // 引入图表数据
-import {Line, YiBiao,SanDian} from "@/charts/options"
+import {Line, YiBiao, SanDian} from "@/charts/options"
+import ChartsCom from "@/charts/ChartsCom.vue";
 
 export default {
   name: "HomeIndex",
-
   components: {
+    ChartsCom,
     FangGe,
     Charts01
   },
   data() {
     return {
+      // 图表高度
+      height: "300px",
       Line,
       YiBiao,
-      SanDian
+      SanDian,
     }
   },
 }
@@ -51,19 +54,19 @@ export default {
       <el-row :gutter="10">
         <el-col :xs="24" :sm="24" :md="8" :lg="8">
           <div class="bg-white bg-purple">
-
+            <ChartsCom :options="Line"></ChartsCom>
           </div>
         </el-col>
 
         <el-col :xs="24" :sm="24" :md="8" :lg="8">
           <div class="bg-white bg-purple">
-
+            <ChartsCom :options="YiBiao"></ChartsCom>
           </div>
         </el-col>
 
         <el-col :xs="24" :sm="24" :md="8" :lg="8">
           <div class="bg-white bg-purple-light">
-
+            <ChartsCom :options="SanDian" :height="height"></ChartsCom>
           </div>
         </el-col>
       </el-row>
