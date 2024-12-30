@@ -10,6 +10,12 @@ Vue.use(ElementUI)
 // 引入Sass样式
 import "@/styles/index.scss"
 
+// 全局组件
+import GloCom from "@/views/Home/GlobalCom/GloCom.vue"
+Vue.component("GloCom",GloCom)
+
+// 全局的过滤器
+import "@/filter"
 
 // 取消开发提示
 Vue.config.productionTip = false

@@ -1,6 +1,6 @@
 <script>
 // 引入图表
-import {FangGe, Charts01} from "@/charts/components/index.js";
+import {FangGe, Charts01,Map} from "@/charts/components/index.js";
 
 // 引入图表数据
 import {Line, YiBiao, SanDian} from "@/charts/options"
@@ -11,7 +11,8 @@ export default {
   components: {
     ChartsCom,
     FangGe,
-    Charts01
+    Charts01,
+    Map
   },
   data() {
     return {
@@ -87,7 +88,7 @@ export default {
         <!--        行-->
         <el-col :xs="24" :sm="24" :md="16" :lg="16">
           <div class="bg-white bg-purple-light">
-
+            <Map></Map>
           </div>
         </el-col>
 

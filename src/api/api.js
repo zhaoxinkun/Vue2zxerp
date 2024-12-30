@@ -2,7 +2,7 @@
 import http from "./restfulType"
 
 
-// 用户接口 ---------------------------------------
+// Login 页面api-------------------------------
 
 // 用户登录
 /**
@@ -14,10 +14,27 @@ export const login = data => http.post(`/user/login`, data)
 export const logout = token => http.post(`/user/logout`, token)
 
 
+// 企业首页 页面api-------------------------------
+
+// 查询用户分布
+export const employMap = token => http.get(`/user/employ-map`, token)
+
+// COM api
+
+// 查询所有员工列表
+export const employee = token => http.get(`/user/employee`, token)
 
 
 
-// 申请管理---办公管理接口 ---------------------------------------
+// 办公申请
+// 提交申请 --办公申请
+/**
+ * @param data
+ * */
+export const officeCreate = data => http.post(`apply/office/createOrUpd`, data)
+
+
+// 申请管理---办公管理api-------------------------------
 
 // 办公管理数据list
 export const officeList = data => http.get(`apply/office/list`, data)
@@ -35,22 +52,14 @@ export const officeSubmit = data => http.post(`apply/office/submitToApprove`, da
 export const officeDelete = id => http.delete(`apply/office/delete/${id}`)
 
 
+
 // 申请管理---差旅管理-------------------------------------------
 export const travelDelete = id => http.delete(`apply/travel/delete/${id}`)
 
 
-// 查询用户分布
-export const employMap = token => http.get(`/user/employ-map`, token)
-
-// 查询所有员工列表
-export const employee = token => http.get(`/user/employee`, token)
 
 // 审批类别---办公申请
-// 提交申请 --办公申请
-/**
- * @param data
- * */
-export const officeCreate = data => http.post(`apply/office/createOrUpd`, data)
+
 
 //申请类别-差旅上传
 export const travelUpdate = data => http.upload(`/apply/travel/createOrUpd`,data);
