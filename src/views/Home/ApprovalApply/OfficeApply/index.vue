@@ -11,7 +11,7 @@ import {officeCreate} from "@/api/api";
 
 
 export default {
-  name:"OfficeApply",
+  name: "OfficeApply",
 
   async mounted() {
     // 发送获取员工名单的请求
@@ -121,6 +121,7 @@ export default {
       <span>办公申请</span>
     </div>
 
+
     <!--  from表单-->
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="申请用户" prop="applicant">
@@ -141,7 +142,6 @@ export default {
         <el-select v-model="ruleForm.apply_goods" placeholder="请选择申请物品" style="width: 100%">
           <!--          模拟静态数据-->
           <el-option v-for="val in apply_goods" :key="val.key" :label="val.goods_name" :value="val.key"></el-option>
-
         </el-select>
       </el-form-item>
 

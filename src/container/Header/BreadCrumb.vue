@@ -6,11 +6,11 @@
 <script>
 export default {
   name: "BreadCrumb",
-  watch: {
-    breadcrumbs(newVal) {
-      console.log("newVal", newVal)
-    }
-  },
+  // watch: {
+  //   breadcrumbs(newVal) {
+  //      console.log("newVal", newVal)
+  //   }
+  // },
   computed: {
     breadcrumbs() {
       return this.$route.matched.map(route => ({

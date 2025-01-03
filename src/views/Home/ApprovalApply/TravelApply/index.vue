@@ -131,13 +131,18 @@ export default {
       </el-form-item>
 
 
-      <el-form-item label="申请时间" prop="created">
+      <el-form-item label="申请日期" prop="created">
         <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.created"
                         style="width: 100%;"></el-date-picker>
       </el-form-item>
 
 
-      <el-form-item label="申请物品" prop="apply_goods">
+      <el-form-item label="出差天数" prop="apply_goods_num">
+        <el-input-number v-model="ruleForm.apply_goods_num" :min="1" :max="50" label="申请数量"></el-input-number>
+      </el-form-item>
+
+
+      <el-form-item label="报销金额" prop="apply_goods">
         <el-select v-model="ruleForm.apply_goods" placeholder="请选择申请物品" style="width: 100%">
           <!--          模拟静态数据-->
           <el-option v-for="val in apply_goods" :key="val.key" :label="val.goods_name" :value="val.key"></el-option>
@@ -146,14 +151,8 @@ export default {
       </el-form-item>
 
 
-      <el-form-item label="申请数量" prop="apply_goods_num">
-        <el-input-number v-model="ruleForm.apply_goods_num" :min="1" :max="50" label="申请数量"></el-input-number>
-      </el-form-item>
 
 
-      <el-form-item label="申请描述" prop="apply_reason">
-        <el-input type="textarea" v-model="ruleForm.apply_reason"></el-input>
-      </el-form-item>
 
 
       <!--      表单按钮-->

@@ -1,5 +1,5 @@
 <script>
-import {officeList} from "@/api/api";
+import {officeList, officeSubmit} from "@/api/api";
 
 export default {
   name: "OfficeManage",
@@ -20,8 +20,15 @@ export default {
 
       // 总条数
       rows: 0,
+
       // 页码
-      pages: 0
+      pages: 0,
+
+      // 用于删除loading框处理
+      dialogDelVisible: false,
+
+      // 缓存一些数据
+      temp: {},
     }
   },
   mounted() {
@@ -56,6 +63,73 @@ export default {
       return row[property] === value;
     },
 
+    // 编辑
+    handleEdit(index, row) {
+      console.log(index, row);
+    },
+
+    // 删除
+    handleDelete(index, row) {
+      console.log(index, row);
+      // 显示提示框
+      this.dialogDelVisible = !this.dialogDelVisible;
+      // 方式深拷贝
+      this.temp = {...row}
+    },
+
+    // 删除确定的处理逻辑
+    async DeleteData() {
+      const res = await officeDelete(this.temp.id);
+      let {code} = res.data;
+      if (code === 20000) {
+        //通知框组件
+        this.$notify({
+          title: '删除成功',
+          message: '删除成功',
+          type: "success",
+          duration: 1500
+        });
+        this.dialogDelVisible = !this.dialogDelVisible;
+        // 重新刷新数据列表
+        await this.getList()
+      }
+    },
+
+    // 提交的逻辑
+    async handleSubmit(index, row) {
+      // 弹出框组件 来自element ui
+      this.$confirm('是否确定提交?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+          // 执行提交
+          .then(async () => {
+            // 发送请求
+            let res = await officeSubmit({id: row.id})
+            let {code} = res.data;
+            if (code === 20000) {
+              //通知框组件
+              this.$notify({
+                title: '提交成功',
+                message: '提交成功',
+                type: "success",
+                duration: 1000
+              });
+              // 再次请求数据,刷新变化
+              await this.getListData();
+              await this.$router.push("/approvalProcess/firstInstance")
+            }
+
+          })
+          // 取消提交
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消'
+            });
+          });
+    },
   },
   computed: {
     // 状态的插槽数据
@@ -95,6 +169,19 @@ export default {
     <div slot="header" class="clearfix">
       <span>办公申请</span>
     </div>
+
+
+    <!--      搜索框  clearable-可清除   input事件,只要输入就触发获取列表-->
+    <el-input
+        prefix-icon="el-icon-search"
+        placeholder="请输入查询用户名"
+        v-model="listQuery.name"
+        @input="getListData()"
+        clearable
+        style="width: 100%;"
+        size="medium"
+    >
+    </el-input>
 
     <!--表格   stripe斑马纹-->
     <el-table
@@ -172,7 +259,7 @@ export default {
       <!--      操作-->
       <el-table-column label="操作" width="280px">
         <template slot-scope="scope">
-
+          <!--          @click="handleEdit(scope.$index, scope.row)" 自带的,用于获取行信息的数据-->
           <el-button
               size="mini"
               type="success"
@@ -185,11 +272,12 @@ export default {
               @click="handleDelete(scope.$index, scope.row)">删除
           </el-button>
 
+          <!--          :disabled="scope.row.status === 1" 用于判断是否可以点击(通过它行的信息的状态)-->
           <el-button
               size="mini"
               type="primary"
               @click="handleSubmit(scope.$index, scope.row)"
-              :disabled="scope.status === 0">提交
+              :disabled="scope.row.status === 1">提交
           </el-button>
 
         </template>

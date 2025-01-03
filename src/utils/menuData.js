@@ -28,7 +28,7 @@ export default [
         // 子数据
         children: [
             {
-                title: "办公申请",
+                title: "办公审批",
                 url: "/approvalApply/officeApply",
                 icon: "el-icon-shopping-bag-2",
                 name: "officeApply",
@@ -36,14 +36,14 @@ export default [
             },
 
             {
-                title: "差旅申请",
+                title: "差旅审批",
                 url: "/approvalApply/travelApply",
                 icon: "el-icon-s-promotion",
                 name: "travelApply",
                 component: "ApprovalApply/TravelApply"
             },
             {
-                title: "请假申请",
+                title: "请假审批",
                 url: "/approvalApply/leaveApply",
                 icon: "el-icon-chat-dot-square",
                 name: "leaveApply",

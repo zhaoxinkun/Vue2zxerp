@@ -25,44 +25,41 @@ export const employMap = token => http.get(`/user/employ-map`, token)
 export const employee = token => http.get(`/user/employee`, token)
 
 
+// 申请管理    -------------------------------------------------------------
 
 // 办公申请
-// 提交申请 --办公申请
+
+// 办公审批  --- >立即申请
 /**
  * @param data
  * */
 export const officeCreate = data => http.post(`apply/office/createOrUpd`, data)
 
-
-// 申请管理---办公管理api-------------------------------
-
-// 办公管理数据list
+// 办公管理 ---> 数据list
 export const officeList = data => http.get(`apply/office/list`, data)
 
-// 办公管理-提交
+// 办公管理 ---> 提交
 /**
  * @param data
  * */
 export const officeSubmit = data => http.post(`apply/office/submitToApprove`, data)
 
-// 办公管理-删除
+// 办公管理 ---> 删除
 /**
  * @param id
  * */
 export const officeDelete = id => http.delete(`apply/office/delete/${id}`)
 
 
-
 // 申请管理---差旅管理-------------------------------------------
 export const travelDelete = id => http.delete(`apply/travel/delete/${id}`)
-
 
 
 // 审批类别---办公申请
 
 
 //申请类别-差旅上传
-export const travelUpdate = data => http.upload(`/apply/travel/createOrUpd`,data);
+export const travelUpdate = data => http.upload(`/apply/travel/createOrUpd`, data);
 
 // 差旅审批的数据list
 export const travelList = data => http.get(`apply/travel/list`, data)
