@@ -27,7 +27,7 @@ const routes = [
         // 布局容器
         path:"/container",
         name:"container",
-        // redirect:"/index",
+        redirect:"/index",
         component: ()=>import("../container/index.vue"),
         // 已使用递归形式
     },

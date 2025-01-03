@@ -6,32 +6,28 @@
 <script>
 export default {
   name: "BreadCrumb",
-  data() {
-    return {
-      RouteData: []
+  watch: {
+    breadcrumbs(newVal) {
+      console.log("newVal", newVal)
     }
   },
-  mounted() {
-    this.RouteData=this.$route.matched;
-    console.log("RouterData is ",this.RouteData);
-  },
-  watch:{
-    $route(newVal){
-      this.RouterMatchedHandle(newVal.matched)
-      console.log("RouterData is ",this.RouteData)
+  computed: {
+    breadcrumbs() {
+      return this.$route.matched.map(route => ({
+        path: route.path,
+        breadcrumb: route.meta.breadcrumb
+      }))
     }
   },
-  methods:{
-    RouterMatchedHandle(info){
-      this.RouteData = info;
-    }
-  }
 }
 </script>
 
 <template>
   <el-breadcrumb separator="/">
     <span> <i class="el-icon-s-home"> </i>当前位置:</span> &nbsp;&nbsp;
-    <el-breadcrumb-item v-for="v in RouteData" :to="{path:v.path}"> {{ v.meta.title }}</el-breadcrumb-item>
+    <el-breadcrumb-item v-for="(crumb,index) in breadcrumbs" :key="index"
+                        :to="(index !== 1 && index !==breadcrumbs.length-1) ? crumb.path : undefined">
+      {{ crumb.breadcrumb }}
+    </el-breadcrumb-item>
   </el-breadcrumb>
 </template>

@@ -56,19 +56,6 @@ export default {
       return row[property] === value;
     },
 
-    // 每页多少条变化的函数
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-      this.listQuery.pageSize = val;
-      this.getListData();
-    },
-
-    // 页码变化的函数
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-      this.listQuery.pageNo = val;
-      this.getListData();
-    },
   },
   computed: {
     // 状态的插槽数据
@@ -176,7 +163,7 @@ export default {
           <!--            使用全局过滤器  -->
           <!--          status +statusStyle 根据状态样式过略-->
           <!--          status +statusFilter 状态的显示内容-->
-          <el-tag :type="scope.row.status | statusStyle" disable-transitions> {{scope.row.status | statusFilter }}
+          <el-tag :type="scope.row.status | statusStyle" disable-transitions> {{ scope.row.status | statusFilter }}
           </el-tag>
         </template>
       </el-table-column>
@@ -224,15 +211,27 @@ export default {
       <!--      size-change每页多少条的函数-->
       <!--      current-change 页码变化的函数-->
       <!--      current-page 当前页码-->
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="listQuery.pageNo"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="listQuery.pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="rows">
-      </el-pagination>
+      <!--      <el-pagination-->
+      <!--          @size-change="handleSizeChange"-->
+      <!--          @current-change="handleCurrentChange"-->
+      <!--          :current-page="listQuery.pageNo"-->
+      <!--          :page-sizes="[10, 20, 30, 40]"-->
+      <!--          :page-size="listQuery.pageSize"-->
+      <!--          layout="total, sizes, prev, pager, next, jumper"-->
+      <!--          :total="rows">-->
+      <!--      </el-pagination>-->
+
+      <!--      layout="total, prev, pager, next"-->
+      <!--      使用分页器组件-->
+      <Pagination
+          @action="getListData"
+          :pageNum.sync="listQuery.pageNo"
+          :seleSizes="[10, 20, 30, 40]"
+          :item.sync="listQuery.pageSize"
+          :total="rows"
+      >
+
+      </Pagination>
     </div>
 
   </el-card>

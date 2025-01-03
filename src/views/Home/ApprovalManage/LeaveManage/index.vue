@@ -52,6 +52,11 @@ export default {
 
     // 筛选处理函数
     filterHandler(value, row, column) {
+      // value 就是我们的状态值
+      // row是我们的表行数据的信息
+      // console.log(" is ",value)
+      // console.log("row is ",row)
+      // console.log("column is ",column)
       const property = column['property'];
       return row[property] === value;
     },
@@ -212,16 +217,16 @@ export default {
 
     <div class="block">
       <!--        分页功能-->
-      <!--      layout:需要显示的内容,用逗号分割,-->
-      <!--      total:数据总条数,-->
-      <!--      sizes:每页显示的页面数量,-->
-      <!--      prev:上一页,-->
-      <!--      pager:页码列表,-->
-      <!--      next:下一页,-->
-      <!--      jumper:跳页元素-->
+      <!--      layout:需要显示的内容布局方式,用逗号分割,-->
+        <!--      total:数据总条数,-->
+        <!--      sizes:每页显示的页面数量,-->
+        <!--      prev:上一页,-->
+        <!--      pager:页码列表,-->
+        <!--      next:下一页,-->
+        <!--      jumper:跳页元素-->
       <!--      page-size:每页显示的数量-->
       <!--      current-page:当前页数-->
-      <!--      size-change每页多少条的函数-->
+      <!--      size-change每页展示多少条的函数-->
       <!--      current-change 页码变化的函数-->
       <!--      current-page 当前页码-->
       <el-pagination
