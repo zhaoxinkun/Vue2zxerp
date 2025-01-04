@@ -1,8 +1,12 @@
 <script>
 import {officeDelete, officeList, officeSubmit} from "@/api/api";
+import Dialog from "@/components/global/my-Dialog/Dialog.vue";
 
 export default {
   name: "OfficeManage",
+  components: {
+    Dialog
+  },
   data() {
     return {
       // 表格数据
@@ -70,7 +74,7 @@ export default {
 
     // 删除
     handleDelete(index, row) {
-      // 点击的时候并不是真正的删除,而是先显示出对话框
+      // 点击的时候并不是真正地删除,而是先显示出对话框
       // console.log(index, row);
       this.dialogDelVisible = !this.dialogDelVisible;
       // 方式深拷贝,提前准备删除的id数据
@@ -326,17 +330,27 @@ export default {
 
 
     <!--    弹框-->
-    <el-dialog
-        title="办公审批-删除"
-        :visible.sync="dialogDelVisible"
-        width="30%"
+    <!--    <el-dialog-->
+    <!--        title="办公审批-删除"-->
+    <!--        :visible.sync="dialogDelVisible"-->
+    <!--        width="30%"-->
+    <!--    >-->
+    <!--      <span>你确定要删除嘛?</span>-->
+    <!--      <span slot="footer" class="dialog-footer">-->
+    <!--    <el-button @click="dialogDelVisible = false">取 消</el-button>-->
+    <!--    <el-button type="primary" @click="DeleteData">确 定</el-button>-->
+    <!--  </span>-->
+    <!--    </el-dialog>-->
+
+    <Dialog
+        :dialogTitle="'办公审批-删除'"
+        :isVisible.sync="dialogDelVisible"
+        :btnTitle="'删 除'"
+        @confirm="DeleteData"
     >
-      <span>你确定要删除嘛?</span>
-      <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogDelVisible = false">取 消</el-button>
-    <el-button type="primary" @click="DeleteData">确 定</el-button>
-  </span>
-    </el-dialog>
+      <p>是否删除</p>
+
+    </Dialog>
 
 
   </el-card>
