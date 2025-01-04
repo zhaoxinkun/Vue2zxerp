@@ -1,5 +1,5 @@
 <script>
-import {officeList, officeSubmit} from "@/api/api";
+import {officeDelete, officeList, officeSubmit} from "@/api/api";
 
 export default {
   name: "OfficeManage",
@@ -70,10 +70,10 @@ export default {
 
     // 删除
     handleDelete(index, row) {
-      console.log(index, row);
-      // 显示提示框
+      // 点击的时候并不是真正的删除,而是先显示出对话框
+      // console.log(index, row);
       this.dialogDelVisible = !this.dialogDelVisible;
-      // 方式深拷贝
+      // 方式深拷贝,提前准备删除的id数据
       this.temp = {...row}
     },
 
@@ -91,7 +91,7 @@ export default {
         });
         this.dialogDelVisible = !this.dialogDelVisible;
         // 重新刷新数据列表
-        await this.getList()
+        await this.getListData()
       }
     },
 
@@ -131,6 +131,7 @@ export default {
           });
     },
   },
+
   computed: {
     // 状态的插槽数据
     StatusMenu() {
@@ -285,6 +286,7 @@ export default {
 
     </el-table>
 
+    <!--    分页器-->
     <div class="block">
       <!--        分页功能-->
       <!--      layout:需要显示的内容,用逗号分割,-->
@@ -321,6 +323,21 @@ export default {
 
       </Pagination>
     </div>
+
+
+    <!--    弹框-->
+    <el-dialog
+        title="办公审批-删除"
+        :visible.sync="dialogDelVisible"
+        width="30%"
+    >
+      <span>你确定要删除嘛?</span>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogDelVisible = false">取 消</el-button>
+    <el-button type="primary" @click="DeleteData">确 定</el-button>
+  </span>
+    </el-dialog>
+
 
   </el-card>
 
