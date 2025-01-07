@@ -1,5 +1,8 @@
 <script>
+// 导入api
 import {officeCreate, officeDelete, officeList, officeSubmit} from "@/api/api";
+
+// 导入对话框
 import TextDialog from "@/components/global/my-Dialog/TextDialog.vue";
 import FromDialog from "@/components/global/my-Dialog/FromDialog.vue";
 
@@ -54,15 +57,27 @@ export default {
         if (code === 20000) {
           // 存储数据
           this.tableData = data.list;
-          console.log("获取办公审批列表成功");
+          this.$notify({
+            title: '提示',
+            message: '获取数据成功',
+            type: 'success'
+          });
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;
         } else {
-          console.log("获取办公审批列表失败");
+          this.$notify({
+            title: '提示',
+            message: '获取数据失败',
+            type: 'error'
+          });
         }
       } catch (error) {
-        console.error("请求发生错误：", error);
+        this.$notify({
+          title: '提示',
+          message: '获取数据失败',
+          type: 'error'
+        });
       }
     },
 
@@ -85,7 +100,7 @@ export default {
 
     },
 
-    // 删除
+    // 删除,用于显示对话框
     handleDelete(index, row) {
       // 点击的时候并不是真正地删除,而是先显示出对话框
       // console.log(index, row);
@@ -94,7 +109,7 @@ export default {
       this.temp = {...row}
     },
 
-    // 删除确定的处理逻辑
+    // 确定删除的处理逻辑
     async DeleteData() {
       const res = await officeDelete(this.temp.id);
       let {code} = res.data;
@@ -150,7 +165,7 @@ export default {
   },
 
   computed: {
-    // 状态的插槽数据
+    // 状态筛选器的插槽数据
     StatusMenu() {
       // 数组对象的去重
       // 创建map

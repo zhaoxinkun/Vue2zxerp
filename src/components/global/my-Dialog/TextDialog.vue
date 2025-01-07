@@ -32,7 +32,7 @@ export default {
 
 <template>
   <el-dialog
-      title="dialogTitle"
+      :title="dialogTitle"
       :visible.sync="isVisible"
       width="30%"
       :before-close="cancel"
