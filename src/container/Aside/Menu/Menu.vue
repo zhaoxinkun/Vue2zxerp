@@ -15,35 +15,36 @@ export default {
   // 本地化菜单数据
   data() {
     return {
-     Items
+      Items
     }
   },
   components: {
     MenuItem
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    }
+    // handleOpen(key, keyPath) {
+    //   console.log(key, keyPath);
+    // },
+    // handleClose(key, keyPath) {
+    //   console.log(key, keyPath);
+    // }
   }
 }
 </script>
 
 <template>
 
+  <!--  @open="handleOpen"-->
+  <!--  @close="handleClose"-->
   <el-menu
       default-active="/index"
       class="el-menu-vertical-demo el-menu"
       router
       exact
-      @open="handleOpen"
-      @close="handleClose">
+  >
 
-<!--    使用自己的菜单组件-->
-    <MenuItem v-for="item in Items"  :key="item.url" :item="item"></MenuItem>
+    <!--    使用自己的菜单组件-->
+    <MenuItem v-for="item in Items" :key="item.url" :item="item"></MenuItem>
 
 
   </el-menu>

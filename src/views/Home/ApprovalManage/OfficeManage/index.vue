@@ -1,11 +1,13 @@
 <script>
-import {officeDelete, officeList, officeSubmit} from "@/api/api";
-import Dialog from "@/components/global/my-Dialog/Dialog.vue";
+import {officeCreate, officeDelete, officeList, officeSubmit} from "@/api/api";
+import TextDialog from "@/components/global/my-Dialog/TextDialog.vue";
+import FromDialog from "@/components/global/my-Dialog/FromDialog.vue";
 
 export default {
   name: "OfficeManage",
   components: {
-    Dialog
+    FromDialog,
+    TextDialog
   },
   data() {
     return {
@@ -30,6 +32,9 @@ export default {
 
       // 用于删除loading框处理
       dialogDelVisible: false,
+
+      // 用于编辑的dialog处理
+      dialogEditVisible: false,
 
       // 缓存一些数据
       temp: {},
@@ -69,7 +74,15 @@ export default {
 
     // 编辑
     handleEdit(index, row) {
-      console.log(index, row);
+      // console.log(index, row);
+      this.dialogEditVisible = !this.dialogEditVisible;
+      this.temp = {...row}
+    },
+
+    // 确定编辑的逻辑
+    async EditData() {
+      const res = await officeCreate()
+
     },
 
     // 删除
@@ -342,15 +355,28 @@ export default {
     <!--  </span>-->
     <!--    </el-dialog>-->
 
-    <Dialog
+    <!--    编辑的对话框-->
+    <!--        <FromDialog-->
+    <!--            :dialogTitle="'编辑'"-->
+    <!--            :isVisible="dialogEditVisible"-->
+    <!--            :btnTile="'确 定'"-->
+
+    <!--         >-->
+
+    <!--        </FromDialog>-->
+
+
+    <!--    删除的对话框-->
+    <TextDialog
         :dialogTitle="'办公审批-删除'"
         :isVisible.sync="dialogDelVisible"
         :btnTitle="'删 除'"
         @confirm="DeleteData"
     >
+      <!--      confirm emit的方法名字,调用父组件中的DeleteDate方法-->
       <p>是否删除</p>
 
-    </Dialog>
+    </TextDialog>
 
 
   </el-card>

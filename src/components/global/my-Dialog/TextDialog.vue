@@ -20,7 +20,7 @@ export default {
     // 取消
     cancel() {
       // 需要关闭对话框,isVisible休要修改,但是他在父组件里,所以使用$emit
-    this.$emit("update:isVisible", false);
+      this.$emit("update:isVisible", false);
     },
     // 确定
     confirm() {

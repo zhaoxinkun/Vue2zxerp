@@ -181,7 +181,7 @@ export default {
           <!--            使用全局过滤器  -->
           <!--          status +statusStyle 根据状态样式过略-->
           <!--          status +statusFilter 状态的显示内容-->
-          <el-tag :type="scope.row.status | statusStyle" disable-transitions> {{scope.row.status | statusFilter }}
+          <el-tag :type="scope.row.status | statusStyle" disable-transitions> {{ scope.row.status | statusFilter }}
           </el-tag>
         </template>
       </el-table-column>
@@ -215,15 +215,16 @@ export default {
 
     </el-table>
 
+    <!--    使用分页组件-->
     <div class="block">
       <!--        分页功能-->
       <!--      layout:需要显示的内容布局方式,用逗号分割,-->
-        <!--      total:数据总条数,-->
-        <!--      sizes:每页显示的页面数量,-->
-        <!--      prev:上一页,-->
-        <!--      pager:页码列表,-->
-        <!--      next:下一页,-->
-        <!--      jumper:跳页元素-->
+      <!--      total:数据总条数,-->
+      <!--      sizes:每页显示的页面数量,-->
+      <!--      prev:上一页,-->
+      <!--      pager:页码列表,-->
+      <!--      next:下一页,-->
+      <!--      jumper:跳页元素-->
       <!--      page-size:每页显示的数量-->
       <!--      current-page:当前页数-->
       <!--      size-change每页展示多少条的函数-->
