@@ -60,11 +60,6 @@ export default {
         if (code === 20000) {
           // 存储数据
           this.FirstInstanceData = data.list;
-          this.$notify({
-            title: '提示',
-            message: '数据更新成功',
-            type: 'success'
-          });
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;

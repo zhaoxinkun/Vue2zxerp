@@ -4,6 +4,7 @@ import {CreateDoc, docList, DownloadDoc} from "@/api/api";
 
 // dialog对话框
 import TextDialog from "@/components/global/my-Dialog/TextDialog.vue";
+import {getToken} from "@/utils/token";
 
 export default {
   name: "FirstInstance",
@@ -50,6 +51,7 @@ export default {
     this.getDocListData();
   },
   methods: {
+
     // 获取表格数据
     async getDocListData() {
       try {
@@ -60,11 +62,6 @@ export default {
         if (code === 20000) {
           // 存储数据
           this.docListData = data.list;
-          this.$notify({
-            title: '提示',
-            message: '数据更新成功',
-            type: 'success'
-          });
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;
@@ -90,6 +87,7 @@ export default {
       return row[property] === value;
     },
 
+    // 对话框的配置项
     async DialogConfig(type, row) {
       this.temp = {...row}
       // 点击后,不管怎么的,都要显示我们的对话框了
@@ -116,23 +114,68 @@ export default {
           break;
       }
     },
+
     // 点击确定执行的逻辑
     async confirm() {
       // //传的参数 row.id传给服务端
       let {id} = this.temp;
+
+      // 请求下载文件,这里并没有执行
+      const handleDownload = async () => {
+        // 这里是发送下载带id的请求
+        let res = await DownloadDoc({id})
+        let {code, data} = res.data;
+        if (code === 20000) {
+          // 我们获取到文件的路径
+          // console.log(data.file_path)
+          // await this.getDocListData(); //查询数据
+          // console.log(process.env.VUE_APP_procedural)
+          this.downloadFile(`${process.env.VUE_APP_procedural}static/${data.file_path}`, data.file_path);
+        }
+      }
+
+      // 判断type类型,执行方法
       this.dialogType === 'generate' ?
           await CreateDoc({id})
           :
-          await DownloadDoc({id});
+          await handleDownload()
+      this.dialogVisible = false;
+      await this.getDocListData(); //查询数据
+
+
+    },
+
+    // 下载的流的请求
+    downloadFile(url, fileName) {  //第二次请求 获取到文件流
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.responseType = "blob"; //blob字节流
+      xhr.setRequestHeader('token', getToken()); //传入token
+      xhr.send();
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          console.log(xhr.response)
+          this.createA(xhr.response, fileName);
+        }
+      }
+    },
+
+    //动态创建a标签  <!-- <a href="文件的链接地址" download="下载的文件名称"></a> -->
+    createA(data, fileName) {
+      let _blob = new Blob([data]);
+      //window对象下有URL对象作用：专门用来将blob或file读取成url;
+      let a = document.createElement('a'); //创建a标签
+      a.href = window.URL.createObjectURL(_blob);
+      a.download = fileName;  //下载的文件名称
+      a.click(); //触发a标签
       this.$notify({
-        title: '提示',
-        message: '操作成功',
+        title: '下载凭证',
+        message: '下载凭证成功',
         type: 'success',
         duration: 1000
       });
-      this.dialogVisible = false;
-      await this.getDocListData(); //查询数据
     }
+
   },
 
   computed: {
@@ -271,7 +314,7 @@ export default {
     <div class="block">
       <!--      使用分页器组件-->
       <Pagination
-          @action="docListData"
+          @action="getDocListData"
           :pageNum.sync="listQuery.pageNo"
           :seleSizes="[10, 20, 30, 40]"
           :item.sync="listQuery.pageSize"
