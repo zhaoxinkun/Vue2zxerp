@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-
+  <div>this is second</div>
 </template>
 
 <style scoped>

@@ -4,7 +4,6 @@ import {FirstInstanceData, FirstPass, FirstReject} from "@/api/api";
 
 // dialog对话框
 import TextDialog from "@/components/global/my-Dialog/TextDialog.vue";
-import {statusFilter} from "@/filter/filter";
 
 export default {
   name: "FirstInstance",
@@ -93,7 +92,9 @@ export default {
 
     async DialogConfig(type, row) {
       this.temp = {...row}
+      // 点击后,不管怎么的,都要显示我们的对话框了
       this.dialogVisible = !this.dialogVisible;
+      // 传进来的type类型判断
       switch (type) {
         case 'pass':
           this.dialogConfig = {
@@ -116,7 +117,7 @@ export default {
       }
     },
     async confirm() {
-//传的参数 app_id,app_type,id 传给服务端
+      //传的参数 app_id,app_type,id 传给服务端
       let {app_id, app_type, id} = this.temp;
       this.dialogType === 'pass' ?
           await FirstPass({app_id, app_type, id})
@@ -248,7 +249,7 @@ export default {
               size="mini"
               type="success"
               @click="DialogConfig('pass',scope.row)"
-              :disabled="scope.row.result !== 'pass'"
+              :disabled="scope.row.result === 'pass' "
           >通过
           </el-button>
 
@@ -256,7 +257,7 @@ export default {
               size="mini"
               type="danger"
               @click="DialogConfig('reject',scope.row)"
-              :disabled="scope.row.result !== 'reject'"
+              :disabled="scope.row.result !== 'pass' || scope.row.result === ''"
           >驳回
           </el-button>
 

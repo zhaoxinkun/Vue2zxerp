@@ -84,7 +84,7 @@ export const FirstReject = data => http.post(`approve/one/reject`, data)
 
 
 // 档案管理
-export const doc = data => http.get(`doc/list/`, data)
+export const docList = data => http.get(`doc/list/`, data)
 
 // 生成凭证
 export const CreateDoc = data => http.post(`doc/createFile`, data)

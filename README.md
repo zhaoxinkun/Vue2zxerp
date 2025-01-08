@@ -69,4 +69,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## 1.7日任务
 
-+ 一审页面的完善
++ 一审页面的完善(对于dialog的type复用)
+
+## 1.8日任务
+
++ 档案管理页面处理
