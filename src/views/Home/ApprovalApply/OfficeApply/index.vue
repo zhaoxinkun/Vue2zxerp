@@ -17,11 +17,6 @@ export default {
     // 发送获取员工名单的请求
     try {
       this.EmployeeData = await getEmployeeData()
-      this.$notify({
-        title: '提示',
-        message: '获取人员列表信息成功',
-        type: 'success',
-      });
     } catch (error) {
       this.$notify({
         title: '提示',
