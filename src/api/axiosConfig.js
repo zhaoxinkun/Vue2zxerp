@@ -10,7 +10,8 @@ import {Message} from "element-ui";
 import {getToken} from "@/utils/token";
 
 // 设置基本地址
-axios.defaults.baseURL = "http://124.223.161.17:5058/api/";
+// axios.defaults.baseURL = "http://124.223.161.17:5058/api/";
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
 
 // 书写公共配置
 // 请求拦截器

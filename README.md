@@ -74,3 +74,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## 1.8日任务
 
 + 档案管理页面处理
++ 生成凭证逻辑处理
++ 下载凭证逻辑处理
+    + 第一个请求拿数据和path,download方法用oath发送AJAX请求,拿到bolb文件流
+    + 第二个请求,执行下载逻辑[包含一个动态a标签方法,并触发下载])
++ 定义env环境变量
+    + .env.development
+    + .env.production
+    + 内容必须以VUE_APP开头,并不能包含任何特殊字符
++ 

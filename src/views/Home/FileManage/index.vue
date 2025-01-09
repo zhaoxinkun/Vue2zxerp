@@ -147,6 +147,7 @@ export default {
 
     // 下载的流的请求
     downloadFile(url, fileName) {  //第二次请求 获取到文件流
+      // 在这里设置我们的xhr对象
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url);
       xhr.responseType = "blob"; //blob字节流
