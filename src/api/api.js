@@ -51,16 +51,11 @@ export const officeSubmit = data => http.post(`apply/office/submitToApprove`, da
 export const officeDelete = id => http.delete(`apply/office/delete/${id}`)
 
 
-
 // 申请管理---差旅管理-------------------------------------------
 export const travelDelete = id => http.delete(`apply/travel/delete/${id}`)
 
-
-// 审批类别---办公申请
-
-
 //申请类别-差旅上传
-export const travelUpdate = data => http.upload(`/apply/travel/createOrUpd`, data);
+export const travelUpload = data => http.upload(`/apply/travel/createOrUpd`, data);
 
 // 差旅审批的数据list
 export const travelList = data => http.get(`apply/travel/list`, data)

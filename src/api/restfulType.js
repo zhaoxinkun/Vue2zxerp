@@ -17,8 +17,9 @@ const http = {
     // 删除请求
     delete: (url, params) => axios.delete(url, params),
 
-    upload:(url,file)=>axios.post(url,file,{
-        headers:{'Content-Type':'multipart/form-data'}
+    // 上传请求
+    upload: (url, file) => axios.post(url, file, {
+        headers: {'Content-Type': 'multipart/form-data'}
     })
 }
 

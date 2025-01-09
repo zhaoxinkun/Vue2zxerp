@@ -4,7 +4,7 @@
 import {getEmployeeData} from "@/utils/EmployeeData";
 
 // 导入提交申请的api
-import {travelList} from "@/api/api";
+import {travelUpload} from "@/api/api";
 
 
 export default {
@@ -44,7 +44,7 @@ export default {
         // 发票文件
         bill: "",
         // 省市信息
-        destination: []
+        destination: "北京市"
       },
 
       // 校验规则
@@ -74,12 +74,17 @@ export default {
   },
 
   methods: {
+
     // 收集表单数据----提交申请
     submitForm(formName) {
+      let fromData = new FormData();
+      for (let key in this.ruleForm) {
+        fromData.append(key, this.ruleForm[key]);
+      }
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // 发送请求
-          let response = await travelList(this.ruleForm);
+          let response = await travelUpload(this.ruleForm);
           // 结构数据
           let {code, data} = response.data;
           if (code === 20000) {
@@ -109,6 +114,27 @@ export default {
       this.$refs[formName].resetFields();
     },
 
+    // 上传文件行为
+    uploadFile(params) {
+      // param是文件信息
+      // 缓存
+      this.ruleForm.bill = params.file
+    },
+
+    // 文件超出提示
+    handleExceed() {
+      this.$message("超出最大文件数")
+    },
+    // 上传前
+    beforeUpload(file) {
+      // 这里是文件的详细信息
+      // console.log(file)
+      // 判断文件格式
+      const isJPG = file.type === "image/jpeg" ? null : this.$message("文件格式不对");
+      // 判断文件大小
+      const isSize = file.size / 1024 / 1024 < 2 ? null : this.$message("超出文件大小限制");
+      return isJPG && isSize;
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
@@ -131,6 +157,7 @@ export default {
 
     <!--  from表单-->
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
       <el-form-item label="申请用户" prop="applicant">
         <el-select v-model="ruleForm.applicant" placeholder="请选择申请人" style="width: 100%">
           <!--          遍历员工列表数据-->
@@ -155,20 +182,42 @@ export default {
       </el-form-item>
 
 
+      <!--      参数说明-->
+      <!--      action 提交文件的地址-->
+      <!--      http-request 覆盖默认上传行为-->
+      <!--      multiple 是否支持多选文件-->
+      <!--      show-file-list 显示文件列表-->
+      <!--      limit 最大文件数量-->
+      <!--      on-exceed 文件超出提示-->
+      <!--      list-type 文件列表类型-->
+
+
       <!--      文件上传-->
       <el-form-item label="发票文件" prop="bill">
         <el-upload
             class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action=""
+            :http-request="uploadFile"
+            multiple
+            show-file-list
+            :limit="3"
+            :on-exceed="handleExceed"
+            list-type="picture"
+            :before-upload="beforeUpload"
             :on-preview="handlePreview"
-            :on-remove="handleRemove"
-
-            list-type="picture">
+            :on-remove="handleRemove">
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
       </el-form-item>
 
+      <el-form-item label="出差城市" prop="destination">
+          <el-cascader
+              v-model="ruleForm.destination"
+              :options="options"
+              :props="{ expandTrigger: 'hover' }"
+              @change="handleChange"></el-cascader>
+      </el-form-item>
 
       <!--      表单按钮-->
       <el-form-item>
