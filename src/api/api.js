@@ -25,19 +25,6 @@ export const employMap = token => http.get(`/user/employ-map`, token)
 export const employee = token => http.get(`/user/employee`, token)
 
 
-// 申请管理    -------------------------------------------------------------
-
-// 办公申请
-
-// 办公审批  --- >立即申请
-/**
- * @param data
- * */
-export const officeCreate = data => http.post(`apply/office/createOrUpd`, data)
-
-// 办公管理 ---> 数据list
-export const officeList = data => http.get(`apply/office/list`, data)
-
 // 办公管理 ---> 提交
 /**
  * @param data
@@ -54,11 +41,6 @@ export const officeDelete = id => http.delete(`apply/office/delete/${id}`)
 // 申请管理---差旅管理-------------------------------------------
 export const travelDelete = id => http.delete(`apply/travel/delete/${id}`)
 
-//申请类别-差旅上传
-export const travelUpload = data => http.upload(`/apply/travel/createOrUpd`, data);
-
-// 差旅审批的数据list
-export const travelList = data => http.get(`apply/travel/list`, data)
 
 // 省市级数据
 export const city = data => http.get(`/user/area`, data)
@@ -86,3 +68,28 @@ export const CreateDoc = data => http.post(`doc/createFile`, data)
 
 // 下载凭证
 export const DownloadDoc = data => http.get(`doc/download`, data)
+
+
+// 申请类别的api ------------------------------------------------------------------
+// 办公申请
+/**
+ * @param data
+ * */
+export const officeCreate = data => http.post(`apply/office/createOrUpd`, data)
+
+// 请假类别
+export const leaveCreate = data => http.post(`apply/leave/createOrUpd`, data)
+
+// 差旅类别
+export const travelCreate = data => http.upload(`/apply/travel/createOrUpd`, data);
+
+
+// 类别管理的API  ------------------------------------------------------------------
+// 办公管理 ---> 数据list
+export const officeList = data => http.get(`apply/office/list`, data)
+
+// 请假管理
+export const leaveList = data => http.get(`apply/leave/list`, data)
+
+// 出差管理
+export const travelList= data => http.get(`apply/travel/list`, data)

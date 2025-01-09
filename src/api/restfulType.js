@@ -19,8 +19,9 @@ const http = {
 
     // 上传请求
     upload: (url, file) => axios.post(url, file, {
-        headers: {'Content-Type': 'multipart/form-data'}
-    })
+            headers: {'Content-Type': 'multipart/form-data'}
+        }
+    )
 }
 
 export default http;

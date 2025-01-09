@@ -1,5 +1,6 @@
 <script>
 // 导入api
+// 用于编辑,删除,列表数据,提交
 import {officeCreate, officeDelete, officeList, officeSubmit} from "@/api/api";
 
 // 导入对话框
@@ -57,11 +58,6 @@ export default {
         if (code === 20000) {
           // 存储数据
           this.tableData = data.list;
-          this.$notify({
-            title: '提示',
-            message: '获取数据成功',
-            type: 'success'
-          });
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;

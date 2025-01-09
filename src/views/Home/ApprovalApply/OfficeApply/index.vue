@@ -36,7 +36,7 @@ export default {
       // 请求过来的员工列表数据
       EmployeeData: [],
 
-      // 员工的数据
+      // 表单数据
       ruleForm: {
         // 用户名
         applicant: "",
@@ -88,7 +88,7 @@ export default {
           // 发送请求
           let response = await officeCreate(this.ruleForm);
           // 结构数据
-          let {code, data} = response.data;
+          let {code} = response.data;
           if (code === 20000) {
             // 跳转路由
             await this.$router.push("/approvalManage/officeManage")
@@ -129,9 +129,9 @@ export default {
       <span>办公申请</span>
     </div>
 
-
     <!--  from表单-->
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
       <el-form-item label="申请用户" prop="applicant">
         <el-select v-model="ruleForm.applicant" placeholder="请选择申请人" style="width: 100%">
           <!--          遍历员工列表数据-->
@@ -169,6 +169,7 @@ export default {
         <el-button type="primary" @click="submitForm('ruleForm'); open1" plain>立即申请</el-button>
         <el-button @click="resetForm('ruleForm')">取消申请</el-button>
       </el-form-item>
+
     </el-form>
 
   </el-card>

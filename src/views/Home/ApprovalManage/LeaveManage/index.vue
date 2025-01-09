@@ -1,8 +1,8 @@
 <script>
-import {officeList} from "@/api/api";
+import {leaveList} from "@/api/api";
 
 export default {
-  name: "OfficeManage",
+  name: "LeaveManage",
   data() {
     return {
       // 表格数据
@@ -32,13 +32,13 @@ export default {
     async getListData() {
       try {
         // 发送请求
-        const res = await officeList(this.listQuery);
+        const res = await leaveList(this.listQuery);
         // 解构数据
         let {code, data} = res.data;
         if (code === 20000) {
           // 存储数据
           this.tableData = data.list;
-          console.log("获取办公审批列表成功");
+          console.log(data.list)
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;
@@ -114,6 +114,18 @@ export default {
       <span>办公申请</span>
     </div>
 
+    <!--      搜索框  clearable-可清除   input事件,只要输入就触发获取列表-->
+    <el-input
+        prefix-icon="el-icon-search"
+        placeholder="请输入查询用户名"
+        v-model="listQuery.name"
+        @input="getListData()"
+        clearable
+        style="width: 100%;"
+        size="medium"
+    >
+    </el-input>
+
     <!--表格   stripe斑马纹-->
     <el-table
         :data="tableData"
@@ -148,24 +160,17 @@ export default {
         </template>
       </el-table-column>
 
-      <!--      物品名称-->
+      <!--      请假天数-->
       <el-table-column
-          prop="apply_goods"
-          label="物品名称"
+          prop="leave_days"
+          label="请假天数"
       >
       </el-table-column>
 
-      <!--      申请数量-->
+      <!--      请假原因-->
       <el-table-column
-          prop="apply_goods_num"
-          label="申请数量"
-      >
-      </el-table-column>
-
-      <!--      申请原因-->
-      <el-table-column
-          prop="apply_reason"
-          label="申请原因"
+          prop="leave_reason"
+          label="请假原因"
       >
       </el-table-column>
 
