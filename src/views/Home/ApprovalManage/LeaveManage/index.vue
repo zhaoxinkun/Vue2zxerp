@@ -164,6 +164,7 @@ export default {
       <el-table-column
           prop="leave_days"
           label="请假天数"
+          column-key="leave_days"
       >
       </el-table-column>
 
@@ -171,6 +172,7 @@ export default {
       <el-table-column
           prop="leave_reason"
           label="请假原因"
+          column-key="leave_reason"
       >
       </el-table-column>
 
@@ -178,6 +180,7 @@ export default {
       <el-table-column
           prop="status"
           label="审批状态"
+          column-key="status"
           :filters="StatusMenu"
           :filter-method="filterHandler"
       >

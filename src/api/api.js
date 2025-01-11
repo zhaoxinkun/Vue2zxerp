@@ -48,26 +48,8 @@ export const city = data => http.get(`/user/area`, data)
 export const userInfo = data => http.get(`/user/info`)
 
 
-// 审批管理
-
-// 一审数据
-export const FirstInstanceData = data => http.get(`approve/one/list`, data)
-
-// 一审通过  需要数据的
-export const FirstPass = data => http.post(`approve/one/pass`, data)
-
-// 一审拒绝
-export const FirstReject = data => http.post(`approve/one/reject`, data)
 
 
-// 档案管理
-export const docList = data => http.get(`doc/list/`, data)
-
-// 生成凭证
-export const CreateDoc = data => http.post(`doc/createFile`, data)
-
-// 下载凭证
-export const DownloadDoc = data => http.get(`doc/download`, data)
 
 
 // 申请类别的api ------------------------------------------------------------------
@@ -84,6 +66,7 @@ export const leaveCreate = data => http.post(`apply/leave/createOrUpd`, data)
 export const travelCreate = data => http.upload(`/apply/travel/createOrUpd`, data);
 
 
+
 // 类别管理的API  ------------------------------------------------------------------
 // 办公管理 ---> 数据list
 export const officeList = data => http.get(`apply/office/list`, data)
@@ -93,3 +76,27 @@ export const leaveList = data => http.get(`apply/leave/list`, data)
 
 // 出差管理
 export const travelList= data => http.get(`apply/travel/list`, data)
+
+
+
+// 审批管理 ------------------------------------------------------------------
+
+// 一审数据
+export const FirstInstanceData = data => http.get(`approve/one/list`, data)
+
+// 一审通过  需要数据的
+export const FirstPass = data => http.post(`approve/one/pass`, data)
+
+// 一审拒绝
+export const FirstReject = data => http.post(`approve/one/reject`, data)
+
+
+
+// 档案管理    ------------------------------------------------------------------
+export const docList = data => http.get(`doc/list/`, data)
+
+// 生成凭证
+export const CreateDoc = data => http.post(`doc/createFile`, data)
+
+// 下载凭证
+export const DownloadDoc = data => http.get(`doc/download`, data)

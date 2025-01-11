@@ -252,12 +252,13 @@ export default {
             :on-preview="handlePreview"
             :on-remove="handleRemove">
           <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过1MB</div>
         </el-upload>
       </el-form-item>
 
       <el-form-item label="出差城市" prop="destination">
         <el-cascader
+            style="width: 100%"
             v-model="ruleForm.destination"
             :options="options"
             :props="{ expandTrigger: 'hover' }"

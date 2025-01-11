@@ -250,6 +250,7 @@ export default {
       <el-table-column
           prop="apply_goods"
           label="物品名称"
+          column-key="apply_goods"
       >
       </el-table-column>
 
@@ -257,6 +258,7 @@ export default {
       <el-table-column
           prop="apply_goods_num"
           label="申请数量"
+          column-key="apply_goods_num"
       >
       </el-table-column>
 
@@ -264,6 +266,7 @@ export default {
       <el-table-column
           prop="apply_reason"
           label="申请原因"
+          column-key="apply_reason"
       >
       </el-table-column>
 
@@ -271,6 +274,7 @@ export default {
       <el-table-column
           prop="status"
           label="审批状态"
+          column-key="status"
           :filters="StatusMenu"
           :filter-method="filterHandler"
       >

@@ -21,7 +21,10 @@ export default {
       // 总条数
       rows: 0,
       // 页码
-      pages: 0
+      pages: 0,
+
+      // 发票文件地址
+      url: process.env.VUE_APP_procedural,
     }
   },
   mounted() {
@@ -164,13 +167,27 @@ export default {
       <el-table-column
           prop="travel_days"
           label="出差天数"
+          column-key="travel_days"
       >
+      </el-table-column>
+
+      <!--      发票文件-->
+      <el-table-column
+          prop="bill_path"
+          label="发票文件"
+          column-key="bill_path"
+      >
+        <template slot-scope="{row}">
+          <img v-if="row.bill_path" width="50" height="50" :src="url+ row.bill_path" alt="">
+          <span v-else>无发票文件</span>
+        </template>
       </el-table-column>
 
       <!--      出差城市-->
       <el-table-column
           prop="destination"
           label="出差城市"
+          column-key="destination"
       >
       </el-table-column>
 
@@ -178,6 +195,7 @@ export default {
       <el-table-column
           prop="status"
           label="审批状态"
+          column-key="status"
           :filters="StatusMenu"
           :filter-method="filterHandler"
       >
