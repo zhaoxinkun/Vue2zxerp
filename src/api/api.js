@@ -2,8 +2,6 @@
 import http from "./restfulType"
 
 
-// Login 页面api-------------------------------
-
 // 用户登录
 /**
  * @ params fromData

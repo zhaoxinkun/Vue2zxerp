@@ -19,6 +19,8 @@ Vue.component("GloCom", GloCom)
 // 分页组件
 Vue.component("Pagination", Pagination)
 
+// 使用vuex
+import store from "@/store"
 
 // 全局的过滤器
 import "@/filter"
@@ -27,6 +29,7 @@ import "@/filter"
 Vue.config.productionTip = false
 
 new Vue({
+    store,
     router,
     render: h => h(App),
 }).$mount('#app')

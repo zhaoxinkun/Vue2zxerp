@@ -91,4 +91,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 + 差旅审批页面
     + 发票文件显示
 + 创建员工页面
-  + 
+
+## 1.14日
+
++ 权限的其他页面处理
++ 角色权限处理
