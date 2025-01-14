@@ -76,7 +76,7 @@ export default {
           // 发送请求
           let response = await leaveCreate(this.ruleForm);
           // 结构数据
-          let {code, data} = response.data;
+          let {code} = response.data;
           if (code === 20000) {
             // 跳转路由
             await this.$router.push("/approvalManage/officeManage")
@@ -149,5 +149,6 @@ export default {
     </el-form>
 
   </el-card>
+
 </template>
 

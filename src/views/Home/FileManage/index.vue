@@ -7,14 +7,14 @@ import TextDialog from "@/components/global/my-Dialog/TextDialog.vue";
 import {getToken} from "@/utils/token";
 
 export default {
-  name: "FirstInstance",
+  name: "FileManage",
   components: {
     TextDialog
   },
   data() {
     return {
       // 表格数据
-      docListData: [],
+      tableData: [],
 
       // 分页查询参数
       listQuery: {
@@ -61,7 +61,7 @@ export default {
         let {code, data} = res.data;
         if (code === 20000) {
           // 存储数据
-          this.docListData = data.list;
+          this.tableData = data.list;
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;
@@ -186,7 +186,7 @@ export default {
       // 创建map
       let map = new Map();
       // 遍历数据
-      for (let item of this.docListData) {
+      for (let item of this.tableData) {
         // 避免修改源数据
         let v = {...item};
         console.log("v is", v)
@@ -234,7 +234,7 @@ export default {
 
     <!--表格   stripe斑马纹-->
     <el-table
-        :data="docListData"
+        :data="tableData"
         stripe
         style="width: 100%">
 

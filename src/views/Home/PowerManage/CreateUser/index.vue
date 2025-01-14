@@ -1,11 +1,11 @@
 <script>
-import {getEmployeeData} from "@/utils/EmployeeData";
+
+import {createUser} from "@/api/api";
 
 export default {
   name: "CreateUser",
-
   data() {
-    // 自定义校验
+    // 自定义校验函数
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
@@ -17,9 +17,6 @@ export default {
       }
     };
     return {
-      // 员工数据
-      EmployeeData: [],
-
       // 表单数据
       ruleForm: {
         account: "",
@@ -29,8 +26,8 @@ export default {
         role_id: '2',
         // 审批权限分配
         permission: [],
-        permissions: ["一审", "二审", "终审"]
       },
+      // 校验规则
       rules: {
         account: [
           {required: true, message: '请输入用户名', trigger: 'blur'},
@@ -40,28 +37,15 @@ export default {
           {min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur'}
         ],
         password2: [
-          {required: true, message: '请输入确认密码', trigger: 'blur'},
-          {min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur'}
+          {required: true, validator: validatePass, trigger: 'blur',},
+
         ],
       },
     }
   },
 
-
-  async mounted() {
-    // 获取员工列表数据
-    try {
-      this.EmployeeData = await getEmployeeData()
-    } catch (error) {
-      // 提示
-      this.$notify({
-        title: '提示',
-        message: '获取员工列表信息失败',
-        type: 'error'
-      });
-    }
-  },
   methods: {
+    // 阻止我们的单选问题
     handleRadioChange() {
       const activeElement = document.activeElement;
       if (activeElement && activeElement.hasAttribute('aria-hidden')) {
@@ -69,9 +53,19 @@ export default {
       }
     },
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          alert('submit!');
+          let res = await createUser(this.ruleForm);
+          let {code, data} = res.data;
+          if (code === 20000) {
+            this.$notify({
+              title: "提示",
+              message: "创建成功",
+              type: "success",
+            })
+            await this.$router.push("/PowerManage/UserLists")
+          }
+
         } else {
           console.log('error submit!!');
           return false;
@@ -98,7 +92,7 @@ export default {
 
       <!--      用户名-->
       <el-form-item label="用户名" prop="name">
-        <el-input v-model="ruleForm.name" placeholder="请填写用户名"></el-input>
+        <el-input v-model="ruleForm.account" placeholder="请填写用户名"></el-input>
       </el-form-item>
 
 
@@ -125,14 +119,11 @@ export default {
 
       <!--      审批权限分配-->
       <el-form-item label="审批权限分配" prop="permission" v-show="ruleForm.role_id ==3">
-        <div>
-          <el-checkbox-group v-model="ruleForm.permission">
-            <el-checkbox-button v-for="item in ruleForm.permissions" :label="item" :key="item">{{
-                item
-              }}
-            </el-checkbox-button>
-          </el-checkbox-group>
-        </div>
+        <el-checkbox-group v-model="ruleForm.permission" size="medium">
+          <el-checkbox-button label="one" >一审</el-checkbox-button>
+          <el-checkbox-button label="two" >二审</el-checkbox-button>
+          <el-checkbox-button label="end" >终审</el-checkbox-button>
+        </el-checkbox-group>
       </el-form-item>
 
 

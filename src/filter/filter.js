@@ -93,3 +93,14 @@ export function categoryStyle(val) {  //
             return val;
     }
 };
+
+
+// 权限处理
+export function PowerManager(val) {
+    switch (val) {
+        case "input":
+            return "普通员工"
+        case "approve":
+            return "审批管理员"
+    }
+}

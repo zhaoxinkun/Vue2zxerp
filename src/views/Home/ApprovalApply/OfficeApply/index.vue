@@ -161,12 +161,13 @@ export default {
 
       <!--      表单按钮-->
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm'); open1" plain>立即申请</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm'); open" plain>立即申请</el-button>
         <el-button @click="resetForm('ruleForm')">重置表单</el-button>
       </el-form-item>
 
     </el-form>
 
   </el-card>
+
 </template>
 

@@ -1,6 +1,6 @@
 <script>
 // 导入请求
-import {FirstInstanceData, FirstPass, FirstReject} from "@/api/api";
+import {FirstInstance, FirstPass, FirstReject} from "@/api/api";
 
 // dialog对话框
 import TextDialog from "@/components/global/my-Dialog/TextDialog.vue";
@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       // 表格数据
-      FirstInstanceData: [],
+      tableData: [],
 
       // 分页查询参数
       listQuery: {
@@ -54,12 +54,12 @@ export default {
     async getFirstInstanceData() {
       try {
         // 发送请求
-        const res = await FirstInstanceData(this.listQuery);
+        const res = await FirstInstance(this.listQuery);
         // 解构数据
         let {code, data} = res.data;
         if (code === 20000) {
           // 存储数据
-          this.FirstInstanceData = data.list;
+          this.tableData = data.list;
           // 总条数
           this.rows = data.rows;
           this.pages = data.pages;
@@ -136,7 +136,7 @@ export default {
       // 创建map
       let map = new Map();
       // 遍历数据
-      for (let item of this.FirstInstanceData) {
+      for (let item of this.tableData) {
         // 避免修改源数据
         let v = {...item};
         console.log("v is", v)
@@ -184,7 +184,7 @@ export default {
 
     <!--表格   stripe斑马纹-->
     <el-table
-        :data="FirstInstanceData"
+        :data="tableData"
         stripe
         style="width: 100%">
 
