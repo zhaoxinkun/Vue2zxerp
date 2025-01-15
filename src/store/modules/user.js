@@ -1,3 +1,4 @@
+// 获取用户信息
 import {userInfo} from "@/api/api";
 
 const state = {

@@ -25,6 +25,9 @@ import store from "@/store"
 // 全局的过滤器
 import "@/filter"
 
+// 加载路由拦截
+import "@/router/permission"
+
 // 取消开发提示
 Vue.config.productionTip = false
 
