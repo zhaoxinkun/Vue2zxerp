@@ -9,6 +9,7 @@ import Items from "@/utils/menuData"
 
 // 导入菜单组件
 import MenuItem from "./MenuItem.vue"
+import {mapGetters} from "vuex";
 
 export default {
   name: "index",
@@ -20,6 +21,9 @@ export default {
   },
   components: {
     MenuItem
+  },
+  computed:{
+    ...mapGetters(["get_routes"])
   },
   methods: {
     // handleOpen(key, keyPath) {
@@ -37,14 +41,14 @@ export default {
   <!--  @open="handleOpen"-->
   <!--  @close="handleClose"-->
   <el-menu
-      default-active="/index"
+      :default-active="$route.path"
       class="el-menu-vertical-demo el-menu"
       router
       exact
   >
 
     <!--    使用自己的菜单组件-->
-    <MenuItem v-for="item in Items" :key="item.url" :item="item"></MenuItem>
+    <MenuItem v-for="item in get_routes" :key="item.url" :item="item"></MenuItem>
 
 
   </el-menu>

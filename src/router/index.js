@@ -14,21 +14,21 @@ import {initRouter} from "@/router/Recursive";
 // 编写路由信息
 export const routes = [
     {
-        path:"/",
-        redirect:"/login"
+        path: "/",
+        redirect: "/login"
     },
     {
         // 登录页
-        path:"/login",
-        name:"login",
-        component: ()=>import("../views/Login/Login.vue"),
+        path: "/login",
+        name: "login",
+        component: () => import("../views/Login/Login.vue"),
     },
     {
         // 布局容器
-        path:"/container",
-        name:"container",
-        redirect:"/index",
-        component: ()=>import("../container/index.vue"),
+        path: "/container",
+        name: "container",
+        redirect: "/index",
+        component: () => import("../container/index.vue"),
         // 已使用递归形式
     },
 ]

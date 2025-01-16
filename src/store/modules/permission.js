@@ -1,6 +1,8 @@
-import {routes} from '@/router'  //路由中的配置对象
-import menuData from '@/utils/menuData' //公共数据
-import {initRouter} from '@/router/Recursive'  //将数据转为路由数据
+import menuData from '@/utils/menuData' //公共路由数据
+
+import {routes} from '@/router'  //路由中的配置对象,目的就是用来找到我们的container,然后往里追加children
+
+import {initRouter} from '@/router/Recursive'  //递归路由的方法
 
 const state = {
     routeData: [] //路由数据
@@ -15,18 +17,19 @@ const mutations = {
 }
 
 const actions = {
+    // rolesArr 这里是我们刚刚从user方法中获取的roles数组
     CHANGEROUTES({commit}, rolesArr) {  //rolesArr  [{id:1,name:'input'}]
         return new Promise((resolve, reject) => {
             //1、取出角色
             let rolesName = rolesArr.map(v => v.name);
-            //2、选筛选home
-            let homeRoutes = routes.filter(v => v.path === '/home')[0];  //{}
+            //2、选筛选出container
+            let homeRoutes = routes.filter(v => v.path === '/container')[0];  //{}
             //3、添加children子级
             homeRoutes.children = [];
             //4、动态生成路由数据
             let filterData = [];  //根据角色来数据过滤
             if (rolesName.includes('administrator')) {  //是否是管理员
-                filterData = menuData;
+                filterData = menuData; //是的话,什么都能看到,直接赋值即可
             } else {
                 filterData = menuData.filter(v => v.roles && rolesName.some(d => v.roles.includes(d)));
             }

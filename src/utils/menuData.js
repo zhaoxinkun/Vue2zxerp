@@ -18,7 +18,7 @@ export default [
         icon: "el-icon-menu",
         name: "index",
         component: "Index",
-        roles: ["input", "approve"]
+        roles: ["input", "approve","administrator"]
     },
     {
         title: "审批类别",
