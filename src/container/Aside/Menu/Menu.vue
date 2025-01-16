@@ -22,7 +22,7 @@ export default {
   components: {
     MenuItem
   },
-  computed:{
+  computed: {
     ...mapGetters(["get_routes"])
   },
   methods: {
