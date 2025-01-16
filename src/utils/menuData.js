@@ -18,6 +18,7 @@ export default [
         icon: "el-icon-menu",
         name: "index",
         component: "Index",
+        roles: ["input", "approve"]
     },
     {
         title: "审批类别",
@@ -25,6 +26,7 @@ export default [
         icon: "el-icon-coin",
         name: "approvalApply",
         component: "ApprovalApply",
+        roles: ["input"],
         // 子数据
         children: [
             {
@@ -57,6 +59,7 @@ export default [
         icon: "el-icon-s-order",
         name: "approvalManage",
         component: "ApprovalManage",
+        roles: ["input", "approve"],
         // 子数据
         children: [
             {
@@ -89,6 +92,7 @@ export default [
         icon: "el-icon-s-order",
         name: "approvalProcess",
         component: "ApprovalProcess",
+        roles: ["approve"],
         // 子数据
         children: [
             {
@@ -121,6 +125,7 @@ export default [
         icon: "el-icon-upload",
         name: "fileManage",
         component: "FileManage",
+        roles: ["approve"]
     },
     {
         title: "全局组件",
@@ -128,6 +133,7 @@ export default [
         icon: "el-icon-menu",
         name: "globalCOM",
         component: "GlobalCom",
+        roles: ["approve"]
     },
     {
         title: "权限管理",
@@ -135,7 +141,8 @@ export default [
         icon: "el-icon-menu",
         name: "powerManage",
         component: "PowerManage",
-        children:[
+        roles: ["approve", "administrator"],
+        children: [
             {
                 title: "创建员工审批员",
                 url: "/powerManage/createUser",

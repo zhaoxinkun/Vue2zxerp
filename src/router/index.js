@@ -12,7 +12,7 @@ import RouterData from "@/utils/menuData";
 import {initRouter} from "@/router/Recursive";
 
 // 编写路由信息
-const routes = [
+export const routes = [
     {
         path:"/",
         redirect:"/login"
